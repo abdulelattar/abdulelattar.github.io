@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firework Simulator Code</title>
+</head>
+<body align="center">
+    // ParticleSystem.pde <br>
+    <br>
+// Array to hold Particle objects<br>
+Particle[] particles;<br>
+int numParticles = 300; // Number of particles to launch at once<br>
+<br>
+// Setteing up the array of particles and the canvas<br>
+void setup() {<br>
+  size(500, 500);<br>
+  particles = new Particle[500]; // <br>
+  for (int i = 0; i < particles.length; i++) {<br>
+    particles[i] = new Particle(); <br>
+  }<br>
+}<br>
+<br>
+void draw() {<br>
+  background(0); <br>
+// Calling the methods of the particle's attributes<br>
+  for (Particle p : particles) {<br>
+    p.update();  <br>
+    p.show();<br>
+  }<br>
+}<br>
+<br>
+// Resetting the particles at the left click's position<br>
+void mousePressed() {<br>
+  resetParticles(mouseX, mouseY, numParticles); <br>
+}<br>
+<br>
+void resetParticles(float startX, float startY, int num) {<br>
+  int launchedParticles = 0;<br>
+  for (Particle p : particles) {<br>
+    if (!p.isActive() && launchedParticles < num) {<br>
+      p.reset(startX, startY); <br>
+      launchedParticles++;<br>
+    }<br>
+  }<br>
+}<br>
+<br>
+<br>
+<br>
+
+//Particle.pde<br>
+<br>
+<br>
+// Represents individual particles with update, show, and reset methods.<br>
+import java.util.Random; // Importing Random class for randomization<br>
+<br>
+class Particle {<br>
+  //Initializing and declaring everything<br>
+  private boolean isActive;<br>
+  private float x;<br>
+  private float y;<br>
+  private float velX;<br>
+  private float velY;<br>
+  private int c; <br>
+  private float size; <br>
+  private float lifeRemaining; <br>
+  private final int initialLife = 200; <br>
+  <br>
+  public Particle() {<br>
+    this.isActive = false;<br>
+    this.x = 0;<br>
+    this.y = 0;<br>
+    this.velX = 0;<br>
+    this.velY = 0;<br>
+    this.c = color(255);<br> 
+    this.size = 5; <br>
+    this.lifeRemaining = 0;<br> 
+    <br>
+    // Randomizing X and Y velocity<br>
+    Random rand = new Random();<br>
+    this.velX = rand.nextFloat() * 4 - 2; // Random float between -2 and 2 for X velocity<br>
+    this.velY = rand.nextFloat() * 4 - 10; // Random float between -10 and -6 for Y velocity (upward motion)<br>
+  }<br>
+  <br>
+  public void update() {<br>
+    // Moving the particle based on its velocity and if its still alive<br>
+    if (isActive) {<br>
+      x += velX; <br>
+      y += velY; <br>
+      <br>
+      velY += 0.2; <br>
+      <br>
+      lifeRemaining--; // Reducing particle's life<br>
+      <br>
+      if (lifeRemaining <= 0) {<br>
+        isActive = false; // Setting isActive to false when lifeRemaining reaches zero <br>
+      }<br>
+    }<br>
+  }<br>
+
+  public void show() {<br>
+    // Displaying the particle if it's active and has remaining life<br>
+    if (isActive && lifeRemaining > 0) {<br>
+      strokeWeight(size); <br>
+      stroke(c); <br>
+      point(x, y); // Drawing the particle as a single point at position (x, y)<br>
+    }<br>
+  }<br>
+
+  public void reset(float startX, float startY) {<br>
+    // Resetting particle attributes when life reaches zero<br>
+    x = startX; <br>
+    y = startY; <br>
+    lifeRemaining = initialLife; <br>
+    <br>
+    // Randomizing X and Y velocity for the next cycle<br>
+    Random rand = new Random();<br>
+    velX = rand.nextFloat() * 4 - 2; <br>
+    velY = rand.nextFloat() * 4 - 10; <br>
+    <br>
+    // Randomly changing the color of the Particle<br>
+    c = color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256)); <br>
+    <br>
+    isActive = true; // Setting isActive to true when resetting the particle<br>
+  }<br>
+  <br>
+  // Particle attributes<br>
+  public boolean isActive() {<br>
+    return isActive;<br>
+  }<br>
+  <br>
+  public void setActive(boolean active) {<br>
+    isActive = active;<br>
+  }<br>
+  <br>
+  public void setPosition(float posX, float posY) {<br>
+    x = posX;<br>
+    y = posY;<br>
+  }<br>
+}<br>
+</body>
+</html>

@@ -1,0 +1,201 @@
+/* Universal selector*/
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+/* Multiple and Child Selector */
+h1, h2, h3 {
+    margin-bottom: 15px;
+}
+
+nav > ul {
+    list-style-type: none;
+}
+
+/* Navigation styling */
+nav {
+    background: #A4BE5C;
+    text-align: center;
+    padding: 10px 0;
+}
+
+nav a {
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+}
+
+nav a:hover {
+    background-color: black;
+}
+
+
+/* Grid area for projects page(skills.html)*/
+.skills-container {
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr;
+    grid-template-areas: 
+        "profile projects education";
+}
+.profile { grid-area: profile; }
+.projects { grid-area: projects; }
+.education { grid-area: education; }
+
+
+
+/* Flexbox for Home Page(index.html) */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Grid for Contact Page(contact.html) */
+.contact-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+/* Sibling and Adjacent Sibling Selector */
+h1 ~ h2 {
+    margin-top: 20px;
+}
+
+h3 + p {
+    margin-top: 10px;
+}
+
+/* Attribute Selector */
+input[type="text"] {
+    border: 1px solid #333;
+}
+
+/* Image styling */
+img {
+    max-width: 100%;
+    border: 3px solid #333;
+    padding: 10px;
+    margin: 20px 0;
+}
+
+/* List styling */
+ul, ol {
+    background-color: #e9e9ef;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+ul li, ol li {
+    margin-bottom: 10px;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color:#007bff;
+    color: white;
+}
+
+/* URL hover */
+a:hover {
+    color: #FF9A8A;
+}
+
+
+
+/* Media queries */
+/* Desktop */
+@media screen and (min-width: 1025px) {
+    body {
+        width: 80%;
+        margin: auto;
+        padding: 20px;
+    }
+
+    header, footer {
+        padding: 20px 40px;
+    }
+
+    .main-content, .sidebar {
+        display: inline-block;
+        vertical-align: top;
+    }
+
+    .main-content {
+        width: 75%;
+    }
+
+    .sidebar {
+        width: 22%;  
+    }
+}
+
+/* Tablet */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    body {
+        width: 85%;
+        padding: 15px;
+        margin: auto;
+    }
+
+    header, footer {
+        padding: 10px 20px;
+    }
+
+    .main-content, .sidebar {
+        display: block;
+        width: 100%;
+    }
+}
+
+/* Phone */
+@media screen and (max-width: 767px) {
+    body {
+        width: 95%;
+        padding: 10px;
+        margin: auto;
+    }
+
+    header, footer {
+        padding: 5px 10px;
+    }
+
+    .main-content, .sidebar {
+        display: block;
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 20px;  
+    }
+
+    nav a {
+        display: block;  
+        margin-bottom: 10px;
+    }
+}
+
